@@ -13,19 +13,37 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
 public class MainActivity extends Activity {
     ListView lv;
     TextViewArrayAdapter adapter;
     ArrayList<String> array;
+    Button addItemsButton;
+    EditText etAddItems;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+
+        addItemsButton=(Button) findViewById(R.id.addItems_button);
+        etAddItems=(EditText)findViewById(R.id.et_addItems);
+
+
+
+
         init();
 
         lv.setAdapter(adapter);
+
+        addItemsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                array.add (etAddItems.getText().toString());
+            }
+        });
 
 
 
@@ -45,6 +63,7 @@ public class MainActivity extends Activity {
         array = new ArrayList<>();
         populateArray();
         adapter = new TextViewArrayAdapter(this, array);
+
         adapter.sort(new Comparator<String>() {
             @Override
             public int compare(String lhs, String rhs) {
@@ -57,12 +76,20 @@ public class MainActivity extends Activity {
     private void populateArray() {
         array.add("PHP");
         array.add("HTML");
+        array.add("Android");
+        array.add("Studio");
+        array.add ("Manay");
+        array.add ("Khan");
     }
+
+
 
     private void linkXML() {
         setContentView(R.layout.activity_main);
         lv = (ListView) findViewById(R.id.listView1);
     }
+
+
 
     // method to remove list item
     protected void removeItemFromList(int position) {
