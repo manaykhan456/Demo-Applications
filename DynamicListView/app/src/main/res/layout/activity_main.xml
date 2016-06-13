@@ -9,13 +9,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Add Items"
-        android:id="@+id/addItems_button"/>
+        android:id="@+id/addItems_button"
+        android:onClick="customFunction"/>
 
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="add items here"
-        android:id="@+id/et_addItems"/>
     <ListView
         android:id="@+id/listView1"
         android:layout_width="match_parent"

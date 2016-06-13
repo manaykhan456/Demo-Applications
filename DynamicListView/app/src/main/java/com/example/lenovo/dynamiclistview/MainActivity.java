@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.DialogInterface;
 import android.content.DialogInterface.OnClickListener;
 import android.os.Bundle;
@@ -16,6 +17,8 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
 public class MainActivity extends Activity {
     ListView lv;
     TextViewArrayAdapter adapter;
@@ -23,13 +26,16 @@ public class MainActivity extends Activity {
     Button addItemsButton;
     EditText etAddItems;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
 
         addItemsButton=(Button) findViewById(R.id.addItems_button);
-        etAddItems=(EditText)findViewById(R.id.et_addItems);
+        etAddItems=(EditText)findViewById(R.id.et_itemsAdd);
+
+
 
 
 
@@ -38,12 +44,7 @@ public class MainActivity extends Activity {
 
         lv.setAdapter(adapter);
 
-        addItemsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                array.add (etAddItems.getText().toString());
-            }
-        });
+
 
 
 
@@ -71,6 +72,23 @@ public class MainActivity extends Activity {
             }
         });
         linkXML();
+    }
+
+    public void customFunction(View v){
+        final Dialog dialog= new Dialog (this);
+        dialog.setContentView(R.layout.dialogbox_layout);
+
+        final EditText value= (EditText) dialog.findViewById(R.id.et_itemsAdd);
+        dialog.findViewById(R.id.buttonAdd).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                array.add(value.getText().toString());
+                adapter.notifyDataSetChanged();
+                dialog.dismiss();
+
+            }
+        });
+        dialog.show();
     }
 
     private void populateArray() {
