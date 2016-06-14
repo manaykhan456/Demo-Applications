@@ -20,41 +20,24 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 public class MainActivity extends Activity {
-    ListView lv;
+    ListView listItems;
     TextViewArrayAdapter adapter;
     ArrayList<String> array;
     Button addItemsButton;
     EditText etAddItems;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        addItemsButton=(Button) findViewById(R.id.addItems_button);
-        etAddItems=(EditText)findViewById(R.id.et_itemsAdd);
-
-
-
-
-
-
         init();
-
-        lv.setAdapter(adapter);
-
-
-
-
-
-        lv.setOnItemLongClickListener(new OnItemLongClickListener() {
+        listItems.setAdapter(adapter);
+        listItems.setOnItemLongClickListener(new OnItemLongClickListener() {
             // setting onItemLongClickListener and passing the position to the function
             @Override
             public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
                                            int position, long arg3) {
                 removeItemFromList(position);
-
                 return true;
             }
         });
@@ -64,17 +47,20 @@ public class MainActivity extends Activity {
         array = new ArrayList<>();
         populateArray();
         adapter = new TextViewArrayAdapter(this, array);
-
-        adapter.sort(new Comparator<String>() {
-            @Override
-            public int compare(String lhs, String rhs) {
-                return lhs.compareTo(rhs);
-            }
-        });
+        sorting();
         linkXML();
     }
 
-    public void customFunction(View v){
+    private void sorting(){
+        adapter.sort(new Comparator<String>() {
+            @Override
+            public int compare(String lhs, String rhs) {
+                return lhs.toLowerCase().compareTo(rhs.toLowerCase());
+            }
+        });
+    }
+
+    public void addingItemsViaDialog (View v){
         final Dialog dialog= new Dialog (this);
         dialog.setContentView(R.layout.dialogbox_layout);
 
@@ -84,6 +70,8 @@ public class MainActivity extends Activity {
             public void onClick(View v) {
                 array.add(value.getText().toString());
                 adapter.notifyDataSetChanged();
+                sorting();
+               adapter.notifyDataSetChanged();
                 dialog.dismiss();
 
             }
@@ -100,16 +88,13 @@ public class MainActivity extends Activity {
         array.add ("Khan");
     }
 
-
-
     private void linkXML() {
         setContentView(R.layout.activity_main);
-        lv = (ListView) findViewById(R.id.listView1);
+        listItems = (ListView) findViewById(R.id.listView1);
+        addItemsButton=(Button) findViewById(R.id.addItems_button);
+        etAddItems=(EditText)findViewById(R.id.et_itemsAdd);
     }
 
-
-
-    // method to remove list item
     protected void removeItemFromList(int position) {
         final int deletePosition = position;
 
@@ -127,7 +112,6 @@ public class MainActivity extends Activity {
                 array.remove(deletePosition);
                 adapter.notifyDataSetChanged();
                 adapter.notifyDataSetInvalidated();
-
             }
         });
         alert.setNegativeButton("CANCEL", new OnClickListener() {
@@ -137,8 +121,6 @@ public class MainActivity extends Activity {
                 dialog.dismiss();
             }
         });
-
         alert.show();
-
     }
 }

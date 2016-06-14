@@ -10,7 +10,7 @@
         android:layout_height="wrap_content"
         android:text="Add Items"
         android:id="@+id/addItems_button"
-        android:onClick="customFunction"/>
+        android:onClick="addingItemsViaDialog"/>
 
     <ListView
         android:id="@+id/listView1"
