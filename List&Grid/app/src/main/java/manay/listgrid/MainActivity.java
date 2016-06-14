@@ -6,6 +6,9 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import manay.adapter.CustomArrayAdapter;
+import manay.helper.Utils;
+
 public class MainActivity extends AppCompatActivity {
 
     ListView listItems;
@@ -78,5 +81,6 @@ public class MainActivity extends AppCompatActivity {
         pictures.add(R.mipmap.racket);
         array.add ("Badminton racket");
 
+        Utils.snackBarNotification(getApplicationContext(), findViewById(R.id.main_layout), "Array Populated", false);
     }
 }
