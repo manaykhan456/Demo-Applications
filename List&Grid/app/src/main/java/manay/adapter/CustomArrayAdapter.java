@@ -1,4 +1,4 @@
-package manay.listgrid;
+package manay.adapter;
 
 import android.app.Activity;
 import android.view.View;
@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import manay.listgrid.R;
 
 /**
  * Created by Lenovo on 6/14/2016.
