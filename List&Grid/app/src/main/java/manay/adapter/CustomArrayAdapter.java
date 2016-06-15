@@ -28,13 +28,13 @@ public class CustomArrayAdapter extends ArrayAdapter<String> {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        View columnView = myActivity.getLayoutInflater().inflate(R.layout.list_column, null, false);
+        View rowView = myActivity.getLayoutInflater().inflate(R.layout.list_column, null, false);
 
-        ImageView imageItem = (ImageView) columnView.findViewById(R.id.image_item);
-        TextView textItem = (TextView) columnView.findViewById(R.id.text_item);
+        ImageView imageItem = (ImageView) rowView.findViewById(R.id.image_item);
+        TextView textItem = (TextView) rowView.findViewById(R.id.text_item);
 
         imageItem.setImageResource(R.mipmap.racket);
-        textItem.setText("Badminton Racket");
-        return columnView;
+        textItem.setText(item.get(position));
+        return rowView;
     }
 }
