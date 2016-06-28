@@ -1,4 +1,4 @@
-package com.example.lenovo.navigationdrawer;
+package nawaz.navigationdrawer;
 
 import org.junit.Test;
 
